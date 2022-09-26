@@ -1,0 +1,26 @@
+{
+  "name": "masontry-grid-demo",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "prod": "next start",
+    "test:types": "tsc",
+    "test:lint": "next lint"
+  },
+  "dependencies": {
+    "next": "12.3.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "18.7.18",
+    "@types/react": "18.0.20",
+    "autoprefixer": "10.4.11",
+    "eslint": "7.32.0",
+    "eslint-config-next": "12.3.0",
+    "postcss": "8.4.16",
+    "tailwindcss": "3.1.8",
+    "typescript": "4.8.3"
+  }
+}
