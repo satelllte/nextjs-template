@@ -1,45 +1,74 @@
-import type { ImageWithSize } from '@/api'
 import { fetchImagesWithSizes } from '@/api'
 import { MasonryGrid } from '@/components/ui/MasonryGrid'
+import type { TileWithHeight } from '@/components/ui/MasonryGrid'
 import { useCallback, useEffect, useState } from 'react'
 
 const CHUNK_SIZE = 11
 
+interface TileData {
+	src: string
+}
+
+interface Tile extends TileWithHeight<TileData> {}
+
+const fetchTiles = async (): Promise<Tile[]> => {
+	const images = await fetchImagesWithSizes(CHUNK_SIZE) // TODO: calculate width of images from URL
+	return images.map((image) => {
+		return {
+			height: image.height,
+			data: { 
+				src: image.src
+			},
+		}
+	})
+}
+
 export const Home = () => {
-	const [images, setImages] = useState<ImageWithSize[]>([])
+	const [tiles, setTiles] = useState<Tile[]>([])
 
 	const fetchFirst = useCallback(async() => {
-		const images = await fetchImagesWithSizes(CHUNK_SIZE) // TODO: calculate width of images from URL
-		setImages(images)
+		setTiles(await fetchTiles())
 	}, [])
 
 	const fetchMore = useCallback(async() => {
-		const newImages = await fetchImagesWithSizes(CHUNK_SIZE) // TODO: calculate width of images from URL
-		setImages(existingImages => [...existingImages, ...newImages])
+		const newTiles = await fetchTiles()
+		setTiles(existingTiles => [...existingTiles, ...newTiles])
 	}, [])
 
 	useEffect(() => {
 		fetchFirst()
-		return () => setImages([])
+		return () => setTiles([])
 	}, [fetchFirst])
+
+	const tileRenderer = useCallback((tile: Tile) => {
+		return (
+			// eslint-disable-next-line @next/next/no-img-element
+			<img src={tile.data.src} alt={'alt'}/>
+		)
+	}, [])
 
 	return (
 		<div>
 			<header className='py-4 mb-4 bg-gray-200 text-center'>Header</header>
 			<div className='m-4'>
-				{!images.length ? null : (
+				{!tiles.length ? <div>...</div> : (
 					<MasonryGrid
-						images={images}
-						colWidth={320}
+						tiles={tiles}
+						tileRenderer={tileRenderer}
+						colWidth={275}
+						gapX={12}
+						gapY={16}
 					/>
 				)}
 			</div>
-			<button
-				className='my-4 mx-auto block py-4 px-8 bg-slate-100 border border-cyan-500'
-				onClick={fetchMore}
-			>
-				Load More
-			</button>
+			{!tiles.length ? null : (
+				<button
+					className='my-4 mx-auto block py-4 px-8 bg-slate-100 border border-cyan-500'
+					onClick={fetchMore}
+				>
+					Load More
+				</button>
+			)}
 		</div>
 	)
 }

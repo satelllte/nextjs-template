@@ -1,27 +1,28 @@
-import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import range from 'lodash.range'
 import chunk from 'lodash.chunk'
 import { useResize } from '../hooks'
 
-type ImageWithSize = {
-	src: string,
-	width: number,
+export interface TileWithHeight<TileData> {
 	height: number
+  data: TileData
 }
 
-interface MasonryGridProps {
+interface MasonryGridProps<TileData> {
 	colWidth: number
 	gapY?: number
 	gapX?: number
-	images: ImageWithSize[]
+	tiles: TileWithHeight<TileData>[]
+	tileRenderer: (tile: TileWithHeight<TileData>) => React.ReactNode
 }
 
-export const MasonryGrid: React.FC<MasonryGridProps> = ({
+export const MasonryGrid = <TileData extends unknown>({
 	colWidth,
 	gapY = 24,
 	gapX = 16,
-	images,
-}) => {
+	tiles,
+	tileRenderer,
+}: MasonryGridProps<TileData>) => {
 	const containerRef = useRef<HTMLDivElement>(null)
 	const [colsCount, setColsCount] = useState<number>(0)
 
@@ -48,28 +49,29 @@ export const MasonryGrid: React.FC<MasonryGridProps> = ({
 
 	useResize(() => updateColsCountIfNeeded())
 
-	const columnStyle: React.CSSProperties = useMemo(() => ({
+	const columnStyle = useMemo<React.CSSProperties>(() => ({
 		width: colWidth,
 		gap: gapY,
 	}), [colWidth, gapY])
 
 	const cols = useMemo(() => {
 		return range(colsCount).map((colIndex) => {
-			const indexes = calcColIndexes(colIndex, colsCount, images)
+			const indexes = calcColIndexes(colIndex, colsCount, tiles)
 			
 			return (
 				<div key={colIndex} className='flex flex-col' style={columnStyle}>
 					{indexes.map(index => {
-						const image = images[index]
+						const tile = tiles[index]
 						return (
-							// eslint-disable-next-line @next/next/no-img-element
-							<img key={index} src={image.src} alt={'alt'}/>
+							<React.Fragment key={index}>
+								{tileRenderer(tile)}
+							</React.Fragment>
 						)
 					})}
 				</div>
 			)
 		})
-	}, [columnStyle, colsCount, images])
+	}, [columnStyle, colsCount, tiles, tileRenderer])
 
 	const containerStyle = useMemo<React.CSSProperties>(() => ({
 		columnGap: gapX,
@@ -94,16 +96,16 @@ const calcColsCount = (
 	return Math.max(Math.floor(fullWidth / (colWidth + gap)), 1)
 }
 
-const calcColIndexes = (
+const calcColIndexes = <TileData extends unknown>(
 	colIndex: number,
 	colsCount: number,
-	images: ImageWithSize[]
+	tiles: TileWithHeight<TileData>[]
 ): number[] => {
-	if (!colsCount || !images.length) { return [] }
+	if (!colsCount || !tiles.length) { return [] }
 
 	const indexes: number[] = []
 
-	const chunks = chunk(images, colsCount)
+	const chunks = chunk(tiles, colsCount)
 
 	chunks.forEach((chunkImages, chunkIndex) => {
 		if (chunkImages[colIndex]) {
