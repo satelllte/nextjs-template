@@ -9,11 +9,11 @@ export interface TileWithHeight<TileData> {
 }
 
 interface MasonryGridProps<TileData> {
+	tiles: TileWithHeight<TileData>[]
+	tileRenderer: (tile: TileWithHeight<TileData>) => React.ReactNode
 	colWidth: number
 	gapY?: number
 	gapX?: number
-	tiles: TileWithHeight<TileData>[]
-	tileRenderer: (tile: TileWithHeight<TileData>) => React.ReactNode
 }
 
 export const MasonryGrid = <TileData extends unknown>({
