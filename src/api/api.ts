@@ -13,7 +13,7 @@ export const fetchImagesWithSizes = async(count: number): Promise<ImageWithSize[
 
 	const images: ImageWithSize[] = (new Array(count)).fill(null).map(() => {
 		const width = randInt(200, 700)
-		const height = randInt(200, 1400)
+		const height = randInt(200, 900)
 		return {
 			src: resolvePlaceholderUrl(width, height),
 			width,
