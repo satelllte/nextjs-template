@@ -17,11 +17,11 @@ interface MasonryGridProps<TileData> {
 }
 
 export const MasonryGrid = <TileData extends unknown>({
+	tiles,
+	tileRenderer,
 	colWidth,
 	gapY = 24,
 	gapX = 16,
-	tiles,
-	tileRenderer,
 }: MasonryGridProps<TileData>) => {
 	const containerRef = useRef<HTMLDivElement>(null)
 	const [colsCount, setColsCount] = useState<number>(0)
