@@ -14,11 +14,13 @@ interface Tile extends TileWithHeight<TileData> {}
 const fetchTiles = async (): Promise<Tile[]> => {
 	const images = await fetchImagesWithSizes(CHUNK_SIZE) // TODO: calculate width of images from URL
 	return images.map((image) => {
+		const height = image.height
+		const data: TileData = { 
+			src: image.src
+		}
 		return {
-			height: image.height,
-			data: { 
-				src: image.src
-			},
+			height,
+			data,
 		}
 	})
 }
