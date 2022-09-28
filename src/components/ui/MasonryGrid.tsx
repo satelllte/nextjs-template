@@ -48,12 +48,12 @@ export const MasonryGrid: React.FC<MasonryGridProps> = ({
 
 	useResize(() => updateColsCountIfNeeded())
 
-	const cols = useMemo(() => {
-		const columnStyle = {
-			width: colWidth,
-			gap: gapY,
-		}
+	const columnStyle: React.CSSProperties = useMemo(() => ({
+		width: colWidth,
+		gap: gapY,
+	}), [colWidth, gapY])
 
+	const cols = useMemo(() => {
 		return range(colsCount).map((colIndex) => {
 			const indexes = calcColIndexes(colIndex, colsCount, images)
 			
@@ -69,7 +69,7 @@ export const MasonryGrid: React.FC<MasonryGridProps> = ({
 				</div>
 			)
 		})
-	}, [colWidth, gapY, colsCount, images])
+	}, [columnStyle, colsCount, images])
 
 	const containerStyle = useMemo<React.CSSProperties>(() => ({
 		columnGap: gapX,
