@@ -82,14 +82,6 @@ export const MasonryGrid: React.FC<MasonryGridProps> = ({
 			className='flex justify-center'
 		>
 			{cols}
-			{/* <div style={columnStyle}></div> */}
-			{/* {images.map(image => {
-				return (
-					<div key={image.src}>
-						{image.src}
-					</div>
-				)
-			})} */}
 		</div>
 	)
 }
