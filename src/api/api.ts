@@ -11,17 +11,15 @@ export interface ImageWithSize {
 export const fetchImagesWithSizes = async(count: number): Promise<ImageWithSize[]> => {
 	await sleep(randInt(400, 700))
 
-	const images: ImageWithSize[] = []
-	for (let i = 0; i < count; i++) {
+	const images: ImageWithSize[] = (new Array(count)).fill(null).map(() => {
 		const width = randInt(200, 700)
 		const height = randInt(200, 1400)
-		console.info('i | width | height: ', i, width, height)
-		images.push({
+		return {
 			src: resolvePlaceholderUrl(width, height),
 			width,
 			height,
-		})
-	}
+		}
+	})
 
 	return images
 }
