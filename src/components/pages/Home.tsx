@@ -1,7 +1,9 @@
-import { fetchImagesWithSizes } from '@/api'
+import { fetchImages, fetchImagesWithSizes } from '@/api'
 import { MasonryGrid } from '@/components/ui/MasonryGrid'
 import type { TileWithHeight } from '@/components/ui/MasonryGrid'
 import { useCallback, useEffect, useState } from 'react'
+import type { Dimensions } from '@/utils/image/getRemoteImageDimensions'
+import { getRemoteImageDimensions } from '@/utils/image/getRemoteImageDimensions'
 
 const CHUNK_SIZE = 11
 
@@ -25,15 +27,24 @@ const fetchTiles = async (): Promise<Tile[]> => {
 	})
 }
 
+const fetchTilesPro = async(): Promise<Tile[]> => {
+	const urls = await fetchImages(CHUNK_SIZE)
+	const promises: Promise<Dimensions>[] = urls.map(url => {
+		return new Promise((resolve) => getRemoteImageDimensions(url).then(dimensions => resolve(dimensions)))
+	})
+	return await Promise.all(promises)
+		.then(dimensions => dimensions.map((dimension, i) => ({ height: dimension.height, data: { src: urls[i] } })))
+}
+
 export const Home = () => {
 	const [tiles, setTiles] = useState<Tile[]>([])
 
 	const fetchFirst = useCallback(async() => {
-		setTiles(await fetchTiles())
+		setTiles(await fetchTilesPro())
 	}, [])
 
 	const fetchMore = useCallback(async() => {
-		const newTiles = await fetchTiles()
+		const newTiles = await fetchTilesPro()
 		setTiles(existingTiles => [...existingTiles, ...newTiles])
 	}, [])
 
