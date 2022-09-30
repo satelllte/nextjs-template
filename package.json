@@ -6,7 +6,9 @@
     "build": "next build",
     "prod": "next start",
     "test:types": "tsc",
-    "test:lint": "next lint"
+    "test:lint": "next lint",
+		"test:units": "vitest run",
+		"test:units:watch": "vitest"
   },
   "dependencies": {
     "lodash.chunk": "4.2.0",
@@ -27,6 +29,7 @@
     "eslint-config-next": "12.3.0",
     "postcss": "8.4.16",
     "tailwindcss": "3.1.8",
-    "typescript": "4.8.3"
+    "typescript": "4.8.3",
+    "vitest": "0.23.4"
   }
 }

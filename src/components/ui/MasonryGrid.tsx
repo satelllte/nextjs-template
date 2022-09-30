@@ -1,7 +1,6 @@
 import React, { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react'
-import range from 'lodash.range'
-import chunk from 'lodash.chunk'
 import { useResize } from '../hooks'
+import { calcDistribution } from './helpers/calcDistribution'
 
 export interface TileWithHeight<TileData> {
 	height: number
@@ -55,15 +54,18 @@ export const MasonryGrid = <TileData extends unknown>({
 	}), [colWidth, gapY])
 
 	const cols = useMemo(() => {
-		return range(colsCount).map((colIndex) => {
-			const indexes = calcColIndexes(colIndex, colsCount, tiles)
-			
+		const distribution = calcDistribution(
+			colsCount,
+			tiles.map(({ height }) => height)
+		)
+
+		return distribution.map((tileIndexes, colIndex) => {
 			return (
 				<div key={colIndex} className='flex flex-col' style={columnStyle}>
-					{indexes.map(index => {
-						const tile = tiles[index]
+					{tileIndexes.map(tileIndex => {
+						const tile = tiles[tileIndex]
 						return (
-							<React.Fragment key={index}>
+							<React.Fragment key={tileIndex}>
 								{tileRenderer(tile)}
 							</React.Fragment>
 						)
@@ -94,24 +96,4 @@ const calcColsCount = (
 	gap: number,
 ): number => {
 	return Math.max(Math.floor(fullWidth / (colWidth + gap)), 1)
-}
-
-const calcColIndexes = <TileData extends unknown>(
-	colIndex: number,
-	colsCount: number,
-	tiles: TileWithHeight<TileData>[]
-): number[] => {
-	if (!colsCount || !tiles.length) { return [] }
-
-	const indexes: number[] = []
-
-	const chunks = chunk(tiles, colsCount)
-
-	chunks.forEach((chunkImages, chunkIndex) => {
-		if (chunkImages[colIndex]) {
-			indexes.push(colIndex + chunkIndex * colsCount)
-		}
-	})
-
-	return indexes
 }

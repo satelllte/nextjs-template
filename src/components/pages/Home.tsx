@@ -5,7 +5,9 @@ import { useCallback, useEffect, useState } from 'react'
 import type { Dimensions } from '@/utils/image/getRemoteImageDimensions'
 import { getRemoteImageDimensions } from '@/utils/image/getRemoteImageDimensions'
 
-const CHUNK_SIZE = 11
+const CHUNK_SIZE = 12
+
+const colWidth = 275
 
 interface TileData {
 	src: string
@@ -33,7 +35,14 @@ const fetchTilesPro = async(): Promise<Tile[]> => {
 		return new Promise((resolve) => getRemoteImageDimensions(url).then(dimensions => resolve(dimensions)))
 	})
 	return await Promise.all(promises)
-		.then(dimensions => dimensions.map((dimension, i) => ({ height: dimension.height, data: { src: urls[i] } })))
+		.then(dimensions => dimensions.map((dimension, i) => {
+			const { height: originalHeight, width: originalWidth } = dimension
+			const height = (colWidth / originalWidth) * originalHeight
+			return {
+				data: { src: urls[i] },
+				height,
+			}
+		}))
 }
 
 export const Home = () => {
@@ -54,6 +63,7 @@ export const Home = () => {
 	}, [fetchFirst])
 
 	const tileRenderer = useCallback((tile: Tile) => {
+		console.info('tile: ', tile)
 		return (
 			// eslint-disable-next-line @next/next/no-img-element
 			<img src={tile.data.src} alt={'alt'}/>
@@ -68,7 +78,7 @@ export const Home = () => {
 					<MasonryGrid
 						tiles={tiles}
 						tileRenderer={tileRenderer}
-						colWidth={275}
+						colWidth={colWidth}
 						gapX={12}
 						gapY={16}
 					/>
