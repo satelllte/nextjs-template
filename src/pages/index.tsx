@@ -1,13 +1,13 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { Home } from '@/components/pages'
+import { Home } from '@/components/pages/Home'
 
 const HomePage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Masontry Grid Demo</title>
-        <meta name='description' content='Masontry Grid Demo' />
+        <title>Sandbox (Next.js)</title>
+        <meta name='description' content='Sandbox (Next.js)' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Home/>

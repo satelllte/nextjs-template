@@ -1,4 +1,6 @@
-# Masontry Grid Demo
+# Sandbox (Next.js)
+
+A sandbox project based on Next.js.
 
 ## Prerequisites
 
@@ -34,7 +36,6 @@ Production build preview command:
 npm run prod
 ```
 
-
 ## Testing
 
 Types:
@@ -47,4 +48,16 @@ Lint:
 
 ```sh
 npm run test:lint
+```
+
+Units:
+
+```sh
+npm run test:units
+```
+
+Units (watch mode):
+
+```sh
+npm run test:units:watch
 ```
