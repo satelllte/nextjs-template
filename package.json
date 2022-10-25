@@ -7,11 +7,10 @@
     "prod": "next start",
     "test:types": "tsc",
     "test:lint": "next lint",
-		"test:units": "vitest run",
-		"test:units:watch": "vitest"
+    "test:units": "vitest run",
+    "test:units:watch": "vitest"
   },
   "dependencies": {
-    "lodash.chunk": "4.2.0",
     "lodash.range": "3.2.0",
     "next": "12.3.0",
     "react": "18.2.0",
@@ -19,7 +18,6 @@
     "react-virtualized": "^9.22.3"
   },
   "devDependencies": {
-    "@types/lodash.chunk": "4.2.7",
     "@types/lodash.range": "3.2.7",
     "@types/node": "18.7.18",
     "@types/react": "18.0.20",
