@@ -1,36 +1,61 @@
 import { useEffect, useRef } from 'react'
-import { Canvas as R3FCanvas, useFrame, useThree } from '@react-three/fiber'
+import { Canvas as R3FCanvas, useFrame } from '@react-three/fiber'
+import { Physics, Debug, usePlane, useSphere } from '@react-three/cannon'
+import type { Triplet } from '@react-three/cannon'
 import type { Mesh } from 'three'
 
-const Box = () => {
-	const meshRef = useRef<Mesh>(null!)
+const Plane = () => {
+	const [planePhysRef] = usePlane<Mesh>(() => ({
+		rotation: [-Math.PI / 2, 0, 0],
+	}))
+  return (
+    <mesh ref={planePhysRef}>
+      <planeGeometry args={[10, 10]} />
+    </mesh>
+  )
+}
 
-	useThree(state => {
-		const camera = state.camera
-		camera.position.set(-2.5, 0, 5)
-		camera.lookAt(0, 0, 0)
-	})
+const Ball = () => {
+  const [ballPhysRef, api] = useSphere<Mesh>(() => ({
+		mass: 1,
+		position: [0, 5, 0],
+		rotation: [0, 0, 0],
+		material: {
+			friction: 0.1,
+			restitution: 0.82
+		}
+	}))
+	const positionRef = useRef<Triplet>([0, 0, 0])
 
-	useFrame((state) => {
-		const time = state.clock.getElapsedTime()
-		const camera = state.camera
-		camera.position.y = Math.sin(time * Math.PI) * 0.1
+	useEffect(() => {
+		const unsubscribe = api.position.subscribe(v => positionRef.current = v)
+		return unsubscribe
+	}, [api])
+
+	useFrame(({ camera }) => {
+		const position = positionRef.current
+		camera.lookAt(...position)
 	})
 
 	useEffect(() => {
 		const onKeyDown = (event: KeyboardEvent) => {
+			const position = positionRef.current
+
 			switch (event.key) {
 				case 'ArrowLeft':
-					meshRef.current.position.x -= 0.1
+					api.applyImpulse([-1,0,0], position)
 					break
 				case 'ArrowRight':
-					meshRef.current.position.x += 0.1
+					api.applyImpulse([1,0,0], position)
 					break
 				case 'ArrowDown':
-					meshRef.current.position.y -= 0.1
+					api.applyImpulse([0,0,1], position)
 					break
 				case 'ArrowUp':
-					meshRef.current.position.y += 0.1
+					api.applyImpulse([0,0,-1], position)
+					break
+				case ' ':
+					api.applyImpulse([0,5,0], position)
 					break
 			}
 		}
@@ -38,22 +63,27 @@ const Box = () => {
 		addEventListener('keydown', onKeyDown)
 
 		return () => removeEventListener('keydown', onKeyDown)
-	}, [])
+	}, [api])
 
 	return (
-		<mesh ref={meshRef}>
-			<boxGeometry/>
-			<meshStandardMaterial color='#ffffff'/>
-		</mesh>
-	)
+    <mesh ref={ballPhysRef}>
+      <sphereGeometry />
+			<meshStandardMaterial color='#ff0000'/>
+    </mesh>
+  )
 }
 
 export const Canvas = () => {
   return (
     <div className='fixed inset-0'>
-      <R3FCanvas>
-				<ambientLight color='#ffffff'/>
-				<Box/>
+      <R3FCanvas camera={{ position: [-1, 5, 5] }}>
+				<ambientLight/>
+				<Physics>
+					<Debug color='green' scale={1.1}>
+						<Plane/>
+						<Ball/>
+					</Debug>
+				</Physics>
 			</R3FCanvas>
     </div>
   )
