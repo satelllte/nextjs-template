@@ -1,6 +1,6 @@
 # Sandbox (Next.js)
 
-A sandbox project based on Next.js.
+A sandbox project based on Next.js. Used just as a playground.
 
 ## Prerequisites
 
