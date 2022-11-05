@@ -1,9 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react'
+import { resolveMetaTitle } from '@/utils/storybook/resolveMetaTitle'
 import { Button } from './Button'
 import type { ButtonProps } from './types'
 
 export default {
-  title: 'atoms/Button',
+  title: resolveMetaTitle('atoms', 'Button'),
   component: Button,
 } as Meta<ButtonProps>
 
