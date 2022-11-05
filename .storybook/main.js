@@ -28,5 +28,8 @@ module.exports = {
 	core: {
 		builder: '@storybook/builder-webpack5'
 	},
+	features: {
+    interactionsDebugger: true,
+  },
 	webpackFinal: (configuration) => webpackEnableAlias(configuration)
 }
