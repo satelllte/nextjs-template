@@ -61,3 +61,21 @@ Units (watch mode):
 ```sh
 npm run test:units:watch
 ```
+
+## Storybook
+
+### Development
+
+```sh
+npm run storybook
+```
+
+Open [http://localhost:6006](http://localhost:6006) in browser to see the result.
+
+### Build static output
+
+```sh
+npm run build-storybook
+```
+
+This will create `storybook-static` build directory with static output files. It can be served on a static website hosting afterwards (e.g. on AWS S3).

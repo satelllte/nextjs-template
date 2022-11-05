@@ -1,6 +1,5 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { Home } from '@/components/pages/Home'
 
 const HomePage: NextPage = () => {
   return (
@@ -10,7 +9,11 @@ const HomePage: NextPage = () => {
         <meta name='description' content='Sandbox (Next.js)' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Home/>
+      <div>
+				<h1>
+					Home Page
+				</h1>
+			</div>
     </>
   )
 }
