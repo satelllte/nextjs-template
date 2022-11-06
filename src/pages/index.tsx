@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { Button } from '@/components/atoms/Button'
 
 const HomePage: NextPage = () => {
   return (
@@ -13,6 +14,9 @@ const HomePage: NextPage = () => {
 				<h1>
 					Home Page
 				</h1>
+				<main>
+					<Button>Button</Button>
+				</main>
 			</div>
     </>
   )
