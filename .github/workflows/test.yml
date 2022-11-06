@@ -21,9 +21,11 @@ jobs:
       run: npm ci
     - name: Test units
       run: npm run test:units
+    - name: Test interactions
+      run: npm run test:interactions
     - name: Test types
       run: npm run test:types
-    - name: Test linting
+    - name: Test lint
       run: npm run test:lint
     - name: Build application
       run: npm run build
