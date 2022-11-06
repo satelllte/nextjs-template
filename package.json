@@ -6,7 +6,7 @@
     "build": "next build",
     "prod": "next start",
     "test": "vitest run",
-		"test:ui": "vitest --ui",
+    "test:ui": "vitest --ui",
     "test:types": "tsc",
     "test:lint": "next lint",
     "test:interactions": "test-storybook",
@@ -14,6 +14,8 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@headlessui/react": "1.7.4",
+    "@heroicons/react": "2.0.13",
     "next": "13.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0"

@@ -12,3 +12,9 @@ export default {
 } as Meta<DisclosureProps>
 
 export const Primary: StoryObj<DisclosureProps> = {}
+
+export const DefaultExpanded: StoryObj<DisclosureProps> = {
+	args: {
+		defaultExpanded: true,
+	},
+}
