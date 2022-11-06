@@ -7,15 +7,15 @@ import type { ButtonProps } from './types'
 export default {
   title: 'atoms/Button',
   component: Button,
-	argTypes: {
-		onClick: { action: true },
-	},
 	args: {
 		children: 'My Button',
 	},
 } as Meta<ButtonProps>
 
 export const Primary: StoryObj<ButtonProps> = {
+	argTypes: {
+		onClick: { action: true },
+	},
 	play: async ({ args, canvasElement }) => {
 		const canvas = within(canvasElement)
 		const button = canvas.getByRole('button')
