@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { Button } from '@/components/atoms/Button'
+import { Disclosure } from '@/components/molecules/Disclosure'
 
 const HomePage: NextPage = () => {
   return (
@@ -16,6 +17,9 @@ const HomePage: NextPage = () => {
 				</h1>
 				<main>
 					<Button>Button</Button>
+					<Disclosure name='My Disclosure'>
+						Disclosure content
+					</Disclosure>
 				</main>
 			</div>
     </>
