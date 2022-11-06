@@ -62,6 +62,12 @@ Units (watch mode):
 npm run test:units:watch
 ```
 
+Interaction tests (Storybook):
+
+```sh
+npm run test:interactions
+```
+
 ## Storybook
 
 ### Development

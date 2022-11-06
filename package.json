@@ -9,6 +9,7 @@
     "test:lint": "next lint",
     "test:units": "vitest run",
     "test:units:watch": "vitest",
+    "test:interactions": "test-storybook",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.20.2",
+    "@storybook/addon-a11y": "6.5.13",
     "@storybook/addon-actions": "6.5.13",
     "@storybook/addon-essentials": "6.5.13",
     "@storybook/addon-interactions": "6.5.13",
@@ -26,8 +28,10 @@
     "@storybook/addon-postcss": "2.0.0",
     "@storybook/addons": "6.5.13",
     "@storybook/builder-webpack5": "6.5.13",
+    "@storybook/jest": "0.0.10",
     "@storybook/manager-webpack5": "6.5.13",
     "@storybook/react": "6.5.13",
+    "@storybook/test-runner": "0.9.0",
     "@storybook/testing-library": "0.0.13",
     "@storybook/theming": "6.5.13",
     "@types/node": "18.11.9",
