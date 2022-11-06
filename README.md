@@ -38,6 +38,18 @@ npm run prod
 
 ## Testing
 
+Primary:
+
+```sh
+npm run test
+```
+
+Primary (Vitest interactive UI):
+
+```sh
+npm run test:ui
+```
+
 Types:
 
 ```sh
@@ -48,18 +60,6 @@ Lint:
 
 ```sh
 npm run test:lint
-```
-
-Units:
-
-```sh
-npm run test:units
-```
-
-Units (watch mode):
-
-```sh
-npm run test:units:watch
 ```
 
 Interaction tests (Storybook):
