@@ -1,87 +1,22 @@
 # Sandbox (Next.js)
 
-A sandbox project based on Next.js. Used just as a playground.
+A sandbox project based on [Next.js](https://nextjs.org/). Used just as a playground.
 
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) v16
 
-## Development
+## Available NPM Scripts
 
-Install dependencies:
-
-```sh
-npm install
-```
-
-Run the development server:
-
-```sh
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in browser to see the result.
-
-## Production Build
-
-Build for production command:
-
-```sh
-npm run build
-```
-
-Production build preview command:
-
-```sh
-npm run prod
-```
-
-## Testing
-
-Primary:
-
-```sh
-npm run test
-```
-
-Primary (Vitest interactive UI):
-
-```sh
-npm run test:ui
-```
-
-Types:
-
-```sh
-npm run test:types
-```
-
-Lint:
-
-```sh
-npm run test:lint
-```
-
-Interaction tests (Storybook):
-
-```sh
-npm run test:interactions
-```
-
-## Storybook
-
-### Development
-
-```sh
-npm run storybook
-```
-
-Open [http://localhost:6006](http://localhost:6006) in browser to see the result.
-
-### Build static output
-
-```sh
-npm run build-storybook
-```
-
-This will create `storybook-static` build directory with static output files. It can be served on a static website hosting afterwards (e.g. on AWS S3).
+| Name | Command | Description |
+| --- | --- | --- |
+| dev | `npm run dev` | Runs [Next.js](https://nextjs.org/) application in development mode on http://localhost:3000 |
+| build | `npm run build` | Builds [Next.js](https://nextjs.org/) application for production into `.next` directory. It can be served on SaaS platform like [Vercel](https://vercel.com/). |
+| prod | `npm run prod` | Previews [Next.js](https://nextjs.org/) application production build from `.next` directory |
+| test | `npm run test` | Runs primary tests using [Vitest](https://vitest.dev/), [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) frameworks |
+| test:ui | `npm run test:ui` | Runs primary tests inside interactive UI sandbox by Vitest, useful for development |
+| test:types | `npm run test:types` | Runs types check by [TypeScript CLI](https://www.typescriptlang.org/docs/handbook/compiler-options.html) |
+| test:lint | `npm run test:lint` | Runs [ESLint](https://nextjs.org/docs/basic-features/eslint) check provided by [Next.js](https://nextjs.org/) |
+| test:interactions | `npm run test:interactions` | Runs [Storybook interaction tests](https://storybook.js.org/docs/react/writing-tests/interaction-testing). Requires Storybook to be live on http://localhost:6006. |
+| storybook | `npm run storybook` | Runs [Storybook](https://storybook.js.org) in development mode on http://localhost:6006. |
+| build-storybook | `npm run build-storybook` | Builds [Storybook](https://storybook.js.org) static output files into `storybook-static` directory. It can be served on a static website hosting like [Netlify](https://www.netlify.com/). |
