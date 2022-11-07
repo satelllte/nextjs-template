@@ -21,6 +21,7 @@ export const Disclosure = ({
 						/>
 					</HeadlessDisclosure.Button>
 					<Transition
+						show={open}
 						enter='transition duration-100 ease-out'
 						enterFrom='transform scale-95 opacity-0'
 						enterTo='transform scale-100 opacity-100'
@@ -28,7 +29,7 @@ export const Disclosure = ({
 						leaveFrom='transform scale-100 opacity-100'
 						leaveTo='transform scale-95 opacity-0'
 					>
-						<HeadlessDisclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
+						<HeadlessDisclosure.Panel static className='px-4 pt-4 pb-2 text-sm text-gray-500'>
 							{children}
 						</HeadlessDisclosure.Panel>
 					</Transition>
