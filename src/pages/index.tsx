@@ -3,6 +3,10 @@ import Head from 'next/head'
 import { Button } from '@/components/atoms/Button'
 import { Disclosure } from '@/components/molecules/Disclosure'
 import { Accordion } from '@/components/molecules/Accordion'
+import { Chart } from '@/components/organisms/Chart'
+import { generateMockData } from '@/components/organisms/Chart/mocks/generateMockData'
+
+const data = generateMockData()
 
 const HomePage: NextPage = () => {
   return (
@@ -22,6 +26,7 @@ const HomePage: NextPage = () => {
 						Disclosure content
 					</Disclosure>
 					<Accordion/>
+					<Chart data={data}/>
 				</main>
 			</div>
     </>
