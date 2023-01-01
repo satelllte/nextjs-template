@@ -21,8 +21,6 @@ jobs:
       run: npm ci
     - name: Test (Primary)
       run: npm run test
-    - name: Test (Interactions)
-      run: echo 0 || npm run test:interactions # TODO: configure for CI
     - name: Test (Types)
       run: npm run test:types
     - name: Test (Lint)

@@ -17,6 +17,5 @@ A sandbox project based on [Next.js](https://nextjs.org/). Used just as a playgr
 | test:ui | `npm run test:ui` | Runs primary tests inside interactive UI sandbox by Vitest, useful for development |
 | test:types | `npm run test:types` | Runs types check by [TypeScript CLI](https://www.typescriptlang.org/docs/handbook/compiler-options.html) |
 | test:lint | `npm run test:lint` | Runs [ESLint](https://nextjs.org/docs/basic-features/eslint) check provided by [Next.js](https://nextjs.org/) |
-| test:interactions | `npm run test:interactions` | Runs [Storybook interaction tests](https://storybook.js.org/docs/react/writing-tests/interaction-testing). Requires Storybook to be live on http://localhost:6006. |
 | storybook | `npm run storybook` | Runs [Storybook](https://storybook.js.org) in development mode on http://localhost:6006. |
 | build-storybook | `npm run build-storybook` | Builds [Storybook](https://storybook.js.org) static output files into `storybook-static` directory. It can be served on a static website hosting like [Netlify](https://www.netlify.com/). |
