@@ -14,7 +14,8 @@ Next.js personal template.
 
 ## Where it's used
 
-🔷 [DSP Terms](https://github.com/satelllte/dsp-terms) - Digital signal processing (DSP) terminology.
+- 🔷 [DSP Terms](https://github.com/satelllte/dsp-terms) - Digital signal processing (DSP) terminology.
+- 🔷 [AudioParam Visualization](https://github.com/satelllte/audioparam-visualization) - Visualization of how Web Audio API's AudioParam value changes over time.
 
 ## Development
 
