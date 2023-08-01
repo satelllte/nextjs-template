@@ -14,9 +14,9 @@ Next.js personal template.
 
 ## Where it's used
 
-[![DSP Terms](https://img.shields.io/static/v1?&message=DSP%20Terms&style=flat&colorA=000000&colorB=000000&label=GitHub&logo=github&logoColor=ffffff)](https://github.com/satelllte/dsp-terms)
-
-[![AudioParam Visualization](https://img.shields.io/static/v1?&message=AudioParam%20Visualization&style=flat&colorA=000000&colorB=000000&label=GitHub&logo=github&logoColor=ffffff)](https://github.com/satelllte/audioparam-visualization)
+- [ADSR](https://github.com/satelllte/adsr) - Simple synthesizer built with Elementary Audio framework.
+- [DSP Terms](https://github.com/satelllte/dsp-terms) - Digital signal processing terminology.
+- [AudioParam Visualization](https://github.com/satelllte/audioparam-visualization) - Visualization of how Web Audio API's `AudioParam` value changes over time.
 
 ## Development
 
