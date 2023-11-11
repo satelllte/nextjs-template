@@ -1,3 +1,7 @@
+**Archived** Don't keep track on it anymore 
+
+--------------
+
 # Next.js Template
 
 Next.js personal template.
